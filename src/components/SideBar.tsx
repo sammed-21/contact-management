@@ -18,7 +18,7 @@ const Sidebar: React.FC = () => {
           openSidebar ? "flex" : "hidden"
         } `}
       >
-        <ul className="min-h-full items-start flex-col mt-[5rem]  justify-start gap-[4rem] flex">
+        <ul onClick={() =>setOpenSidebar((prev) => !prev)} className="min-h-full items-start flex-col mt-[5rem]  justify-start gap-[4rem] flex">
           <li>
             <NavLink
               to="/"
@@ -34,7 +34,7 @@ const Sidebar: React.FC = () => {
               className="text-white hover:text-gray-300"
               // activeClassName="font-semibold"
             >
-              Charts & Maps
+              Charts <br/> & <br/> Maps
             </NavLink>
           </li>
         </ul>

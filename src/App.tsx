@@ -4,20 +4,27 @@ import './App.css'
 import ContactPage from './components/ContactPage';
 import ChartsMapsPage from './components/ChartsMapsPage';
 import SideBar from './components/SideBar';
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+const queryClient = new QueryClient();
 function App() {
  
 
   return (
     <Router>
-       <div className="flex">
+      <QueryClientProvider client={queryClient}>
+        
+       <div className="min-h-[100vh] flex">
           <SideBar />
-          <div className="flex-1 p-8">
+          <div className="flex-1 p-8 overflow-x-hidden ">
             <Routes>
               <Route path="/" element={<ContactPage />} />
               <Route path="/charts-maps" element={<ChartsMapsPage />} />
             </Routes>
           </div>
         </div>
+        <ReactQueryDevtools initialIsOpen={false} position='bottom-right'/>
+        </QueryClientProvider>
     </Router>
   )
 }
