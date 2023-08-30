@@ -1,29 +1,29 @@
-import React from 'react'
-import { CountryData } from '../lib/types'
-
-const Table:React.FC<CountryData> = ({countryData}) => {
-  return (
-      <div>
-           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Noteworthy technology acquisitions 2021
-          </h5>
-          <ul className="font-normal scroll-y text-gray-700 dark:text-gray-400">
-            <li className="border w-[100%] border-gray-900">
-              <ul className="max-h-48 overflow-y-auto">
-                {countryData.map(({ country, countryInfo }: CountryData) => (
-                  <li
-                    key={country}
-                    className="w-[100%]"
-                    value={countryInfo.iso2}
-                  >
-                    {country}
-                  </li>
-                ))}
-              </ul>
-            </li>
-          </ul>
-    </div>
-  )
+import React from "react";
+import { CountryData } from "../lib/types";
+interface TableProps {
+  countryData: CountryData[];
 }
+const Table: React.FC<TableProps> = ({ countryData }) => {
+  const sortedCountryData = countryData.slice().sort((a, b) => b.cases - a.cases);
+  return (
+    <div>
+    
+      <ul className="  max-h-[16rem] overflow-y-auto dark:text-whit  font-normal scroll-y text-gray-700  ">
+        {/* <li className="  border w-[100%] border-gray-900"> */}
+        <table className="font-normal scroll-y text-gray-700 dark:text-gray-400">
+        <tbody>
+          {sortedCountryData.map(({ country, cases }: CountryData) => (
+            <tr className="flex justify-between" key={country}>
+              <td>{country}</td>
+              <td>{cases}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+           
+      </ul>
+    </div>
+  );
+};
 
-export default Table
+export default Table;

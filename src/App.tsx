@@ -14,7 +14,7 @@ function App() {
     <Router>
       <QueryClientProvider client={queryClient}>
         
-       <div className="min-h-[100vh] flex">
+       <div className="overflow-hidden flex">
           <SideBar />
           <div className="flex-1 p-8 overflow-x-hidden ">
             <Routes>

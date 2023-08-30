@@ -1,73 +1,27 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 
 import {
   useCountryData,
-  useWorldwideData,
-  // API_BASE_URL,
-  useCountrySpecificData
  
+  useCountrySpecificData,
 } from "../api/api";
 import Loading from "./Loading";
 import { CountryData } from "../lib/types";
-import Boxh from "./Boxs";
-// import Box from "./Box";
-import Map from "./Map";
-import { useQuery, useQueryClient } from 'react-query';
-// import axios from "axios";
-import Table from "./Table";
-import Box from "./Box";
-// import Boxs from './Boxs';
-
-// const useCountrySpecificData = async (country: string) => {
-//   console.log(country);
-//   let response;
-//   if (country === "worldwide" || country ==="worldWide") {
-//     response = await axios.get(`${API_BASE_URL}/all`);
-//   } else {
-//     response = await axios.get(`${API_BASE_URL}/countries/${country}`);
-//   }
-//   let countryDetails = response.data;
-//   if (!countryDetails) {
-//     response = await axios.get(`${API_BASE_URL}/all`);
-//     console.log('absent')
-//     countryDetails= response.data;
-//   }
-
-//   console.log("country", response);
-//   return countryDetails;
-// };
-// const useCountrySpecificData = (country: string) => {
-//   const queryKey = ['country', country];
-
-//   const fetchData = async () => {
-//     let response;
-//     if (country === 'worldwide') {
-//       response = await axios.get(`${API_BASE_URL}/all`);
-//     } else {
-//       response = await axios.get(`${API_BASE_URL}/countries/${country}`);
-//     }
-
-//     let countryDetails = response.data;
-//     if (!countryDetails) {
-//       response = await axios.get(`${API_BASE_URL}/all`);
-//       countryDetails = response.data;
-//     }
-// console.log(countryDetails);
-//     return countryDetails;
-//   };
-
-//   return useQuery<CountryData>(queryKey, fetchData);
-// };
-
-const ChartsMapsPage: React.FC = () => {
-  const queryClient = useQueryClient()
  
-  const [selectedCountry, setSelectedCountry] = useState('worldWide');
-  // const {
-  //   data: worldwideData,
-  //   error: worldwideError,
-  //   isLoading: worldwideLoading,
-  // } = useWorldwideData();
+import Map from "./Map";
+import { useQueryClient } from "react-query";
+ 
+import Box from "./Box";
+import Table from "./Table";
+import LinearGraph from "./LinearGraph";
+ 
+const ChartsMapsPage: React.FC = () => {
+  const queryClient = useQueryClient();
+
+  const [selectedCountry, setSelectedCountry] = useState("worldWide");
+  const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
+  const [mapZoom, setMapZoom] = useState(3);
+  const [mapCountryName, setmapCountryName] = useState("");
 
   const {
     data: countryData,
@@ -75,21 +29,14 @@ const ChartsMapsPage: React.FC = () => {
     isLoading: countryLoading,
   } = useCountryData();
 
-  const { data:countryNameData,refetch , isLoading: countryNameLoading ,error} =
-  useCountrySpecificData(selectedCountry);
-  // const {
-  //   data: countryNameData,
-  //   error: countryNameError,
-  //   isLoading: countryNameLoading,
-  // } = useQuery(["country"], () => useCountrySpecificData(countryDetail));
-  // useEffect(() => {
-  //   console.log("only to chech the name");
-  //   console.log(countryNameData);
-  //   setSelectedCountry(countryNameData);
-  // }, [countryDetail]);
+  const { data: countryNameData, error } = useCountrySpecificData({
+    country: selectedCountry,
+    setMapCenter,
+    setMapZoom,
+    setmapCountryName,
+  });
 
-  if (countryLoading ) {
-  // if (worldwideLoading || countryNameLoading || countryLoading) {
+  if (countryLoading) {
     return (
       <div className="flex w-full h-full items-center z-10 justify-center">
         <Loading />
@@ -97,94 +44,83 @@ const ChartsMapsPage: React.FC = () => {
     );
   }
 
-  if (countryError|| error) {
+  if (countryError || error) {
     return <div>An error occurred during fetch</div>;
   }
   const handleCountryChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const newCountry = e.target.value;
     console.log(newCountry);
     setSelectedCountry(newCountry);
-    // refetch()
-    queryClient.invalidateQueries(['country', newCountry])
-    // queryClient.setQueryData("country", useCountrySpecificData(e.target.value));
-    // queryClient.invalidateQueries(["country", newCountry]);
-   
+
+    queryClient.invalidateQueries(["country", newCountry]);
   };
-  
- 
+
   return (
-    <div className=" relative bg-gray-400 items-start max-h-full flex max-sm:flex-col  justify-between w-full">
-      <div className="flex-1 bg-orange-300">
-        <div className="md:flex items-start md:justify-between">
-          <div className="flex    flex-wrap gap-2 min-w-[10rem] justify-center   ">
-            {/* {countryNameData && <Boxh
-              cases={countryNameData.cases}
-              todayCases={countryNameData.todayCases}
-              recovered={countryNameData.recovered}
-              deaths={countryNameData.deaths}
-              todayRecovered={countryNameData.todayRecovered}
-              todayDeaths={countryNameData.todayDeaths}
-              loading={countryLoading}         />} */}
-             <>
-                <Box
-                  title="Coronavirus Cases"
-                  case={countryNameData?.cases}
-                  totalCase={countryNameData?.todayCases}
-                />
-                <Box
-                  title="Recovered"
-                  case={countryNameData?.recovered}
-                  totalCase={countryNameData?.todayRecovered}
-                />
-                <Box
-                  title="Deaths Cases"
-                  case={countryNameData?.deaths}
-                  totalCase={countryNameData?.todayDeaths}
-                />
-              </> 
-            
+    <div className="relative  max-md:flex-col    bg-gray-400 gap-1  min-h-[95vh] flex   justify-between md:flex  ">
+      <div className="  justify-between w-[100%] flex flex-col  min-h-full">
+        <div className=" h-[30%] relative gap-3 md:flex w-[100%] flex-wrap px-2 max-sm:flex-wrap md:h-[10rem] md:justify-between md:items-center">
+          <div className="top-1 flex-wrap    md:flex   gap-2  md:p-2 md:items-center ">
+            <Box
+              title="Coronavirus Cases"
+              case={countryNameData?.cases}
+              totalCase={countryNameData?.todayCases}
+            />
+            <Box
+              title="Recovered"
+              case={countryNameData?.recovered}
+              totalCase={countryNameData?.todayRecovered}
+            />
+            <Box
+              title="Deaths Cases"
+              case={countryNameData?.deaths}
+              totalCase={countryNameData?.todayDeaths}
+            />
           </div>
 
-          <div className="  min-w-[10rem]    sm:block ">
-          <select
-        value={selectedCountry}
-        onChange={handleCountryChange}
-        className="border w-[100%] border-gray-900"
-      >
-        <option value="worldWide">WorldWide</option>
-        {countryData?.map(({ country }: CountryData) => (
-          <option key={country} value={country}>
-            {country}
-          </option>
-        ))}
-      </select>
+          <div className="  min-w-[6rem]   sm:block ">
+            <select
+              value={selectedCountry}
+              onChange={handleCountryChange}
+              className="border items-center px-5 py-2 rounded-xl  w-[100%] border-gray-900"
+            >
+              <option value="worldWide">WorldWide</option>
+              {countryData?.map(({ country }: CountryData) => (
+                <option key={country} value={country}>
+                  {country}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
-        <div>
-          <Map />
+        <div className="relative m-3">
+          {countryData && 
+          <Map
+          center={mapCenter}
+          zoom={mapZoom}
+          mapCountryName={mapCountryName}
+          data={countryData}
+          />
+        }
         </div>
       </div>
-      <div className="min-h-[40vh] ">
-        <div className="min-w-[10rem] h-[60vh] sm:block max-w-sm p-6 bg-gray-200 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            Noteworthy technology acquisitions 2021
+
+      <div className=" max-w-[100%] ">
+        <div className="min-w-[6rem] max-md:min-w-[100%] h-[60vh] max-sm:text-sm sm:block max-w-sm p-6 bg-gray-200 border justify-between items-center border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+         
+            
+          <h5 className="mb-2 text-sm font-bold tracking-tight md:text-xl text-gray-900 dark:text-white">
+            live country and covid cases
           </h5>
-          <ul className="font-normal scroll-y text-gray-700 dark:text-gray-400">
-            <li className="border w-[100%] border-gray-900">
-              <ul className="max-h-48 overflow-y-auto">
-                {countryData?.map(({ country, countryInfo }: CountryData) => (
-                  <li
-                    key={country}
-                    className="w-[100%]"
-                    value={countryInfo.iso2}
-                  >
-                    {country}
-                  </li>
-                ))}
-              </ul>
-            </li>
-          </ul>
-          {/* <Table countryData={countryData} /> */}
+          <div>{countryData && <Table countryData={countryData} />}</div>
+   
+          <div>
+            <h5 className="mb-2 text-sm font-bold tracking-tight md:text-xl text-gray-900 dark:text-white">
+              world wide new cases{" "}
+            </h5>
+            <div className="max-w-[15rem] bg-slate-500">
+              {/* <LinearGraph /> */}
+            </div>
+          </div>
         </div>
       </div>
     </div>
