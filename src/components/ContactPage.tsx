@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import ContactForm from './ContactForm';
 import ContactList from './ContactList';
-import ContactDetails from './ContactDetails';
+ 
 
 
 const App = () => {
   const [currentView, setCurrentView] = useState('list'); // 'list', 'form', 'details'
-  const [selectedContact, setSelectedContact] = useState(null);
-  
-  const handleViewChange = (view: React.SetStateAction<string>, contact = null) => {
+   
+  // this page help in switch the component according to the condition
+  const handleViewChange = (view: React.SetStateAction<string>) => {
     setCurrentView(view);
-    setSelectedContact(contact);
+ 
   };
  
 
@@ -27,9 +27,9 @@ const App = () => {
         }
          
       {currentView === 'list' && <ContactList contacts={[]}  />}
-      {/* {currentView === 'list' && <ContactList contacts={contacts} />} */}
+      
           {currentView === 'form' && <ContactForm setCurrentView={setCurrentView} />}
-  {currentView === 'details' && selectedContact && <ContactDetails contact={selectedContact} />}
+  {/* {currentView === 'details' && selectedContact && <ContactDetails contact={selectedContact} />} */}
        
       </div>
     </div>

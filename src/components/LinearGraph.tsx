@@ -27,19 +27,21 @@ const LineGraph: React.FC<LineGraphProps> = () => {
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  
+  // this is the function which get the contact[] and then it convert it into 
+  // the way chart.js format with x and y coordinates divided 
   const buildChartData = (data: any, caseType: string): DataPoint[] => {
     const chartData: DataPoint[] = [];
     let lastPoint: number | undefined;
-    
+    // data has 3 object with cases || deaths ||recovered
     for (let date in data.cases) {
       if (lastPoint) {
         const newPoint: DataPoint = {
           x: date,
           y: data[caseType][date] - lastPoint,
         };
-      
+      // it get the prev date case with current day case and subtract it to get the different
         chartData.push(newPoint);
+        // add it to the new chartData which formatted according to the chart.js
       }
       lastPoint = data[caseType][date];
     }
@@ -48,57 +50,14 @@ const LineGraph: React.FC<LineGraphProps> = () => {
   const newdata = buildChartData(data,'cases');
   
 
-  // const options = {
-  //   legend: {
-  //       display: false,
-  //   },
-  //   elements: {
-  //       point: {
-  //           radius: 0,
-  //       },
-  //   },
-  //   maintainAspectRatio: false,
-  //   tooltips: {
-  //       mode: "index",
-  //       intersect: false,
-  //       callbacks: {
-  //           label: function (tooltipItem: { value: any; }, data: any) {
-  //               return numeral(tooltipItem.value).format("+0,0");
-  //           },
-  //       },
-  //   },
-  //   scales: {
-  //       xAxes: [
-  //           {
-  //               type: "time",
-  //               time: {
-  //                   format: "MM/DD/YY",
-  //                   tooltipFormat: "ll",
-  //               },
-  //           },
-  //       ],
-  //       yAxes: [
-  //           {
-  //               gridLines: {
-  //                   display: false,
-  //               },
-  //               ticks: {
-  //                   callback: function (value: any) {
-  //                       return numeral(value).format("0a");
-  //                   },
-  //               },
-  //           },
-  //       ],
-  //   },
-  // };
-
+   
 
   return (
     < >
       <div>
       {newdata?.length > 0 && (
         <Line
-      // options={options}
+     
           data={{
             datasets: [
               {

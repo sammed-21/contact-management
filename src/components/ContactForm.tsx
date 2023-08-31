@@ -9,10 +9,7 @@ interface ContactInfo{
 const AddCustomerPage: React.FC<ContactInfo> = ({setCurrentView}) => {
  
   const dispatch = useDispatch();
-  // const [name, setName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [phoneNumber, setPhoneNumber] = useState('');
-  // const [status,setStatus] = useState('');
+ 
 
   const [form, setForm] = useState({
     name:"",
@@ -21,7 +18,7 @@ const AddCustomerPage: React.FC<ContactInfo> = ({setCurrentView}) => {
     
     status:""
   })
-
+// handle the form data
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const id = Date.now();
@@ -39,6 +36,7 @@ const AddCustomerPage: React.FC<ContactInfo> = ({setCurrentView}) => {
       phoneNumber: '',
       status: ''
     });
+    // take to list of contacts page
     setCurrentView("list")
   };
 
@@ -48,6 +46,7 @@ const AddCustomerPage: React.FC<ContactInfo> = ({setCurrentView}) => {
         onSubmit={handleSubmit}
         className="bg-white p-8 max-md:p-1 rounded shadow-md space-y-4 w-[60%] max-md:w-full"
       >
+        {/* enter the name */}
            <label className="block text-sm font-medium text-gray-800">
             Name:
           </label>
@@ -57,7 +56,7 @@ const AddCustomerPage: React.FC<ContactInfo> = ({setCurrentView}) => {
              onChange={(e)=> setForm({...form,name:e.target.value})}
           />
           
- 
+ {/* enter the email */}
            <label className="block text-sm font-medium text-gray-800">
             Email:
           </label>
@@ -66,7 +65,7 @@ const AddCustomerPage: React.FC<ContactInfo> = ({setCurrentView}) => {
              placeholder="email"   value={form.email}
              onChange={(e)=> setForm({...form,email:e.target.value})}
           />
-    
+    {/* enter the phone number */}
   <label className="block text-sm font-medium text-gray-800">
             Phone Number:
           </label>
@@ -76,11 +75,11 @@ const AddCustomerPage: React.FC<ContactInfo> = ({setCurrentView}) => {
           onChange={(e) => setForm({ ...form, phoneNumber: e.target.value })}
           />
        
-
+{/* status active or inactive */}
        <label className="block text-sm font-medium text-gray-800">
           Status:
         </label>
-        <div>
+        <div className="flex space-x-4  justify-start">
           <label>
             <input
               type="radio"
@@ -100,7 +99,7 @@ const AddCustomerPage: React.FC<ContactInfo> = ({setCurrentView}) => {
             Inactive
           </label>
         </div>
-
+{/* add the contact to the list */}
         <button type="submit" className="px-5 py-1 w-full text-white bg-black"  >
           Add Customer
         </button>
