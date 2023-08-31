@@ -34,7 +34,7 @@ const ChartsMapsPage: React.FC = () => {
 
   if (countryLoading) {
     return (
-      <div className="flex w-full h-full items-center z-10 justify-center">
+      <div className="flex w-full min-h-screen  items-center z-10 justify-center">
         <Loading />
       </div>
     );
@@ -52,8 +52,8 @@ const ChartsMapsPage: React.FC = () => {
   };
 
   return (
-    <div className="relative  max-md:flex-col overflow-y-hidden  gap-1  min-h-[95vh] flex   justify-between md:flex  ">
-      <div className="  justify-between w-[100%] flex flex-col  min-h-full">
+    <div className="relative  max-xl:flex-col overflow-y-hidden  gap-1  min-screen-h flex   justify-between md:flex  ">
+      <div className="  justify-center w-[100%] flex flex-col  min-h-full">
         <div className="max-sm:s h-[30%] relative gap-3 md:flex w-[100%] flex-wrap px-2 max-sm:flex-wrap md:h-[10rem] md:justify-around md:items-center max-md:py-4">
           <div className="top-1 flex-wrap    md:flex  py-3 gap-2  md:p-2 md:items-center ">
             <Box
@@ -100,16 +100,16 @@ const ChartsMapsPage: React.FC = () => {
         </div>
       </div>
 
-      <div className="relative min-w-[6rem] max-md:min-w-[100%] h-auto max-sm:text-sm sm:block max-w-sm p-6 bg-gray-200 border flex justify-between items-center border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+      <div className="relative min-w-[6rem] max-md:min-w-[100%] h-auto max-sm:text-sm sm:block max-sm:flex-col max-w-sm p-6 bg-gray-200 border flex justify-between items-center border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
         <h5 className="mb-2 text-sm font-bold tracking-tight md:text-xl text-gray-900 dark:text-white">
           live country and covid cases
         </h5>
         <div>{countryData && <Table countryData={countryData} />}</div>
 
-        <div>
           <h5 className="mb-2 text-sm font-bold tracking-tight md:text-xl text-gray-900 dark:text-white">
             world wide new cases{" "}
           </h5>
+        <div>
           <div className="relative bg-white">
             <LineGraph casesType={""} />
           </div>

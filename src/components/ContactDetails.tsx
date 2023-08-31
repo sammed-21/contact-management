@@ -42,7 +42,7 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({ contact }) => {
     setIsOpen(!isOpen); // Toggle modal visibility
   };
   return (
-    <div className=" p-2 min-w-[15rem] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className=" p-2 px-4 min-w-[15rem] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <a href="#">
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {contact.name}
@@ -73,13 +73,13 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({ contact }) => {
           type="button"
           onClick={toggleModal}
         >
-          Toggle modal
+          view
         </button>
 
         {/* Main modal */}
         <div
           id="authentication-modal"
-          className={`text-black absolute flex justify-center items-center z-1000 bg-black/40  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-md:left-0 max-md:top-0 max-md:min-w-[100%]  max-h-full ${
+          className={`text-black absolute bg-backdrop-blur-sm flex  justify-center items-center z-1000 bg-black/50 backdrop-blur-sm bg-blur  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-0rem)] max-md:left-0 max-md:top-0 max-md:min-w-[100%]  max-h-full ${
             isOpen ? "" : "hidden" // Use your condition to control the visibility
           }`}
         >
@@ -111,7 +111,7 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({ contact }) => {
               </button>
               <div className="px-6 py-6 lg:px-8">
                 <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
-                  Sign in to our platform
+                  View Contact Details
                 </h3>
                 <form
                   onSubmit={handleUpdate}

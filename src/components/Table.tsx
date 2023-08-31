@@ -8,7 +8,7 @@ const Table: React.FC<TableProps> = ({ countryData }) => {
   return (
     <div>
     
-      <ul className="  max-h-[16rem] overflow-y-auto dark:text-whit  font-normal scroll-y text-gray-700  ">
+      <ul className=" max-md:w-[100%] max-h-[20rem] overflow-y-auto dark:text-whit  font-normal scroll-y text-gray-700  ">
         {/* <li className="  border w-[100%] border-gray-900"> */}
         <table className="font-normal scroll-y text-gray-700 dark:text-gray-400">
         <tbody>

@@ -6,7 +6,7 @@ import { HiBars3BottomRight } from "react-icons/hi2";
 const Sidebar: React.FC = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
   return (
-    <nav className=" bg-gray-800 min-h-screen text-white max-w-34 p-4 md:flex">
+    <nav className=" bg-gray-800 min-h-screen  text-white max-w-34 p-4 md:flex">
       <div className="flex justify-end md:hidden transition translate-x-2">
         {openSidebar ? (
           <GrClose
@@ -22,8 +22,8 @@ const Sidebar: React.FC = () => {
         )}
       </div>
       <div
-        className={`flex-col h-full  md:flex space-y-4 ${
-          openSidebar ? "flex" : "hidden"
+        className={`flex-col   md:flex space-y-4 ${
+          openSidebar ? "flex" : "hidden" 
         } `}
       >
         <ul
@@ -33,7 +33,7 @@ const Sidebar: React.FC = () => {
           <li>
             <NavLink
               to="/"
-              className="text-white hover:text-gray-300"
+              className=" hover:text-gray-300  "
               // activeClassName="font-semibold"
             >
               Contacts

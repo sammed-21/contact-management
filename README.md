@@ -1,27 +1,58 @@
-# React + TypeScript + Vite
+# Customer Data Management App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a web application built using  React that allows users to manage contact information and Chars and Maps to see and covid information
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Clone this repository: `git clone https://github.com/sammed-21/account-management.git`
+2. Navigate to the project directory: `cd contact-management`
+3. Install dependencies: `npm install`
+4. Run the development server: `npm run dev`
+5. Open your browser and visit: `http://localhost:5173/`
 
-## Expanding the ESLint configuration
+## Contact management
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Visit the homepage to see the list of Contact and their information.
+- Click "Add Contact" to add a new customer.
+- Click on a customer's name to view and update their details.
+- Delete a customer by clicking the "Delete" button.
+- Make use of Redux to store the contact data
 
-- Configure the top-level `parserOptions` property like this:
+###  APIs used to fetch the covid details.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+| Endpoint                | Description                  | Method |
+|-------------------------|------------------------------|--------|
+| https://disease.sh/v3/covid-19/all                  | Get worldwide details fo covid cases            | GET   |
+| https://disease.sh/v3/covid-19/countries             | Get the list of all countries covid details            | GET    |
+| https://disease.sh/v3/covid-19/historical/all?lastdays=all            | Get the all the Historical covide case with date       | GET    |
+ 
+## Maps and Charts
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- Using the country endpoint getting all the historic details of covid cases with 
+- A line graph showing the cases fluctuations using chart.js to show the current and history details in line graph
+
+## Maps
+- Using React Leaflet built a Map to show covid details of the particular country and a marker which popups when it is on the country with total number
+of active, recovered cases and deaths in that particular country.
+
+
+
+
+
+ 
+
+
+
+## Tech Stack
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- React Redux
+- react-leaflet 
+- react-chartjs-2
+
+## Credits
+
+- This project was created by Sammed.
