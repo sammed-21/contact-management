@@ -79,26 +79,32 @@ const AddCustomerPage: React.FC<ContactInfo> = ({setCurrentView}) => {
        <label className="block text-sm font-medium text-gray-800">
           Status:
         </label>
-        <div className="flex space-x-4  justify-start">
-          <label>
-            <input
-              type="radio"
-              value="active"
-              checked={form.status === 'active'}
-              onChange={(e) => setForm({ ...form, status: e.target.value })}
-            />
-            Active
-          </label>
-          <label>
-            <input
-              type="radio"
-              value="inactive"
-              checked={form.status === 'inactive'}
-              onChange={(e) => setForm({ ...form, status: e.target.value })}
-            />
-            Inactive
-          </label>
-        </div>
+        <div className="flex space-x-4 justify-start">
+  <label>
+    <input
+      type="radio"
+      name="status"
+      value="Active"
+      checked={form.status === "Active"}
+      onChange={(e) =>
+        setForm({ ...form, status: e.target.value })
+      }
+    />
+    Active
+  </label>
+  <label>
+    <input
+      type="radio"
+      name="status"
+      value="Inactive"
+      checked={form.status === "Inactive"}
+      onChange={(e) =>
+        setForm({ ...form, status: e.target.value })
+      }
+    />
+    Inactive
+  </label>
+</div>
 {/* add the contact to the list */}
         <button type="submit" className="px-5 py-1 w-full text-white bg-black"  >
           Add Customer
