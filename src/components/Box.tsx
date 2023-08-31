@@ -7,7 +7,7 @@ interface BoxProps {
 }
 const Box: React.FC<BoxProps> = ({ title, case: customCase, totalCase,loading }) => {
   return (
-    <div className="min-w-[10rem]">
+    <div className="min-w-[10rem] p-1">
       <a
         href="#"
         className="block min-w-[10rem] max-h-[5rem] p-1 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"

@@ -7,16 +7,23 @@ import SideBar from './components/SideBar';
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 const queryClient = new QueryClient();
+import { Provider } from 'react-redux';
+import store from './store/store';
 function App() {
  
 
   return (
+    <Provider store={store}>
+
     <Router>
       <QueryClientProvider client={queryClient}>
         
-       <div className="overflow-hidden flex">
+          <div className="min-h-[100vh] relative flex">
+            <div className='relative'>
+
           <SideBar />
-          <div className="flex-1 p-8 overflow-x-hidden ">
+            </div>
+          <div className="relative flex-1 p-8 overflow-x-hidden ">
             <Routes>
               <Route path="/" element={<ContactPage />} />
               <Route path="/charts-maps" element={<ChartsMapsPage />} />
@@ -26,6 +33,7 @@ function App() {
         <ReactQueryDevtools initialIsOpen={false} position='bottom-right'/>
         </QueryClientProvider>
     </Router>
+    </Provider>
   )
 }
 

@@ -1,20 +1,16 @@
 import React, { ChangeEvent, useState } from "react";
 
-import {
-  useCountryData,
- 
-  useCountrySpecificData,
-} from "../api/api";
+import { useCountryData, useCountrySpecificData } from "../api/api";
 import Loading from "./Loading";
 import { CountryData } from "../lib/types";
- 
+
 import Map from "./Map";
 import { useQueryClient } from "react-query";
- 
+
 import Box from "./Box";
 import Table from "./Table";
-import LinearGraph from "./LinearGraph";
- 
+import LineGraph from "./LinearGraph";
+
 const ChartsMapsPage: React.FC = () => {
   const queryClient = useQueryClient();
 
@@ -56,10 +52,10 @@ const ChartsMapsPage: React.FC = () => {
   };
 
   return (
-    <div className="relative  max-md:flex-col    bg-gray-400 gap-1  min-h-[95vh] flex   justify-between md:flex  ">
+    <div className="relative  max-md:flex-col overflow-y-hidden  gap-1  min-h-[95vh] flex   justify-between md:flex  ">
       <div className="  justify-between w-[100%] flex flex-col  min-h-full">
-        <div className=" h-[30%] relative gap-3 md:flex w-[100%] flex-wrap px-2 max-sm:flex-wrap md:h-[10rem] md:justify-between md:items-center">
-          <div className="top-1 flex-wrap    md:flex   gap-2  md:p-2 md:items-center ">
+        <div className="max-sm:s h-[30%] relative gap-3 md:flex w-[100%] flex-wrap px-2 max-sm:flex-wrap md:h-[10rem] md:justify-around md:items-center max-md:py-4">
+          <div className="top-1 flex-wrap    md:flex  py-3 gap-2  md:p-2 md:items-center ">
             <Box
               title="Coronavirus Cases"
               case={countryNameData?.cases}
@@ -92,34 +88,30 @@ const ChartsMapsPage: React.FC = () => {
             </select>
           </div>
         </div>
-        <div className="relative m-3">
-          {countryData && 
-          <Map
-          center={mapCenter}
-          zoom={mapZoom}
-          mapCountryName={mapCountryName}
-          data={countryData}
-          />
-        }
+        <div className="relative mb-3">
+          {countryData && (
+            <Map
+              center={mapCenter}
+              zoom={mapZoom}
+              mapCountryName={mapCountryName}
+              data={countryData}
+            />
+          )}
         </div>
       </div>
 
-      <div className=" max-w-[100%] ">
-        <div className="min-w-[6rem] max-md:min-w-[100%] h-[60vh] max-sm:text-sm sm:block max-w-sm p-6 bg-gray-200 border justify-between items-center border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-         
-            
+      <div className="relative min-w-[6rem] max-md:min-w-[100%] h-auto max-sm:text-sm sm:block max-w-sm p-6 bg-gray-200 border flex justify-between items-center border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <h5 className="mb-2 text-sm font-bold tracking-tight md:text-xl text-gray-900 dark:text-white">
+          live country and covid cases
+        </h5>
+        <div>{countryData && <Table countryData={countryData} />}</div>
+
+        <div>
           <h5 className="mb-2 text-sm font-bold tracking-tight md:text-xl text-gray-900 dark:text-white">
-            live country and covid cases
+            world wide new cases{" "}
           </h5>
-          <div>{countryData && <Table countryData={countryData} />}</div>
-   
-          <div>
-            <h5 className="mb-2 text-sm font-bold tracking-tight md:text-xl text-gray-900 dark:text-white">
-              world wide new cases{" "}
-            </h5>
-            <div className="max-w-[15rem] bg-slate-500">
-              {/* <LinearGraph /> */}
-            </div>
+          <div className="relative bg-white">
+            <LineGraph casesType={""} />
           </div>
         </div>
       </div>

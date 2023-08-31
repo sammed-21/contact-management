@@ -57,4 +57,19 @@
       affectedCountries: number;
     }
     
+    // types.ts
+   export interface Contact {
+      id: number;
+      name: string;
+      email: string;
+      phoneNumber: string;
+      status: string;
+    }
     
+   export interface ContactState {
+      contacts: Contact[];
+    }
+    
+   export const initialState: ContactState = {
+      contacts: [],
+    };
