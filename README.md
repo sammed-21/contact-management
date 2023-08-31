@@ -1,4 +1,4 @@
-# Customer Data Management App
+# Contact Management App with Maps and Chart dashboard
 
 This is a web application built using  React that allows users to manage contact information and Chars and Maps to see and covid information
 
