@@ -14,16 +14,19 @@ const ContactList: React.FC<ContactListProps> = () => {
   const contacts = useSelector((state: RootState) => state.contacts.contacts);
 
   return (
-    <div className="flex flex-col justify-start  flex-wrap h-[80vh]">
+    <div className="flex relative  justify-start   flex-wrap h-[80vh]">
+      <div>
+
       <h1 className="font-bold capitalize items-center w-full text-xl py-3">contact list</h1>
-      <div className="flex flex-wrap w-full">
+      </div>
+      <div className="flex flex-wrap w-full ">
 {/* check if the any contact is there in the store to list it */}
       {contacts.length <= 0 ?  (
         <div className="flex ">
          <h2>No contacts found. Please add contacts using the Create Contact form.</h2>
     </div>
   ):(
-            <ul className="flex gap-3 flex-wrap">
+            <ul className="flex flex-col overflow-x-auto justify-center items-center gap-3 flex-wrap">
               {/* component to list the all the details */}
       {contacts.map((contact:Contact) => (
         <li className="" key={contact.id}>

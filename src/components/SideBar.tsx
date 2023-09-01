@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { GrClose } from "react-icons/gr";
 import { HiBars3BottomRight } from "react-icons/hi2";
+import github from "../../public/pngwing.com (1).png"
 const Sidebar: React.FC = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
   return (
@@ -28,14 +29,16 @@ const Sidebar: React.FC = () => {
       >
         <ul
           onClick={() => setOpenSidebar((prev) => !prev)}
-          className="min-h-full items-start flex-col mt-[5rem]  justify-start gap-[4rem] flex"
+          className="min-h-full items-start flex-col py-9   justify-between   flex"
         >
+          <div className="flex flex-col  justify-center gap-9">
+
           <li>
             <NavLink
               to="/"
               className=" hover:text-gray-300  "
               // activeClassName="font-semibold"
-            >
+              >
               Contacts
             </NavLink>
           </li>
@@ -44,10 +47,15 @@ const Sidebar: React.FC = () => {
               to="/charts-maps"
               className="text-white hover:text-gray-300"
               // activeClassName="font-semibold"
-            >
+              >
               Charts <br /> & <br /> Maps
             </NavLink>
           </li>
+          </div>
+          {/* <a href="https://github.com/sammed-21/contact-management.git" >
+
+          <img src={github} width={50} height={50} alt="link to by github"/>
+          </a> */}
         </ul>
       </div>
     </nav>
