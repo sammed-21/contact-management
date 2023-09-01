@@ -3,11 +3,11 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { GrClose } from "react-icons/gr";
 import { HiBars3BottomRight } from "react-icons/hi2";
-import github from "../../public/pngwing.com (1).png"
+ 
 const Sidebar: React.FC = () => {
   const [openSidebar, setOpenSidebar] = useState(false);
   return (
-    <nav className=" bg-gray-800 min-h-screen  text-white max-w-34 p-4 md:flex">
+    <nav className=" bg-gray-800 min-h-screen z-50 text-white max-w-34 p-4 md:flex">
       <div className="flex justify-end md:hidden transition translate-x-2">
         {openSidebar ? (
           <GrClose

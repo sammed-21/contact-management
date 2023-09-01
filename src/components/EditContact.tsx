@@ -31,9 +31,13 @@ const EditContact: React.FC<ContactDetailsProps> = ({ contact, setIsOpen }) => {
     setIsOpen((prev) => !prev); // Toggle modal visibility
   };
   return (
+    // <div
+    //   id="authentication-modal"
+    //   className={`fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full
+    // `}
     <div
-      id="authentication-modal"
-      className={`text-black absolute bg-backdrop-blur-sm flex  justify-center items-center z-1000 bg-black/50 backdrop-blur-sm bg-blur  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-0rem)] 
+      id="authentication-modal"  
+      className={`text-black fixed  bg-backdrop-blur-sm flex  justify-center items-center z-10 bg-black/50 backdrop-blur-sm bg-blur  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-0rem)] 
     max-md:left-0 max-md:top-0 max-md:min-w-[100%]  max-h-full
     
     `}
