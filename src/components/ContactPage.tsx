@@ -19,7 +19,7 @@ const App = () => {
       <div className="flex justify-start gap-3 w-full ">
    
       </div>
-      <div className="w-full min-h[100vh] flex flex-col justify-center items-center">
+      <div className="w-full min-h[100vh] flex flex-col justify-center items-center md:items-start ease-in ">
       {currentView === "list" ?
           
           <button className="px-3 py-2 bg-gray-900  text-white  " onClick={() => handleViewChange('form')}>Create Contact</button>
