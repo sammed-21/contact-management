@@ -5,10 +5,10 @@ This is a web application built using  React that allows users to manage contact
 ## Getting Started
 
 1. Clone this repository: `git clone https://github.com/sammed-21/account-management.git`
-2. Navigate to the project directory: `cd contact-management`
-3. Install dependencies: `npm install`
-4. Run the development server: `npm run dev`
-5. Open your browser and visit: `http://localhost:5173/`
+<!-- 2. Navigate to the project directory: `cd contact-management` -->
+2. Install dependencies: `npm install`
+3. Run the development server: `npm run dev`
+4. Open your browser and visit: `http://localhost:5173/`
 
 ## Contact management
 
